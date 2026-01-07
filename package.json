@@ -1,6 +1,6 @@
 {
   "name": "@ramstack/hotkey",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A lightweight library for handling hotkeys. No external dependencies.",
   "type": "module",
   "author": "rameel <rameel-b@hotmail.com>",
