@@ -1,28 +1,33 @@
 {
   "name": "@ramstack/hotkey",
   "version": "1.1.0",
-  "description": "A lightweight Javascript library for handling hotkeys. No external dependencies.",
+  "description": "A lightweight library for handling hotkeys. No external dependencies.",
   "type": "module",
-  "main": "dist/hotkey.esm.js",
-  "module": "dist/hotkey.esm.js",
-  "types": "dist/types/hotkey.d.ts",
+  "author": "rameel <rameel-b@hotmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rameel/ramstack.hotkey.js.git"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/hotkey.d.ts",
+        "default": "./dist/hotkey.esm.js"
+      }
+    }
+  },
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
-  "author": "rameel <rameel-b@hotmail.com>",
-  "license": "MIT",
   "scripts": {
     "build": "rollup -c",
     "prebuild": "npm run clean",
     "clean": "rimraf dist",
     "test": "playwright test",
     "pretest": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rameel/ramstack.hotkey.js.git"
   },
   "keywords": [
     "hotkey",
