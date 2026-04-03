@@ -78,17 +78,27 @@ export function registerHotkey(
         target = document.querySelector(target) ?? error(`No element found for selector '${target}'`);
     }
 
-    return listen(target, eventName, function (this: EventTarget, e: KeyboardEvent) {
-        if (!(options as HotkeyEventListenerOptions)?.trusted || e.isTrusted) {
+    const require_trusted = (options as HotkeyEventListenerOptions)?.trusted;
+    const once = (options as HotkeyEventListenerOptions)?.once;
+
+    const native_options = options && typeof options === "object"
+        ? { capture: options.capture, passive: options.passive }
+        : options;
+
+    const unregister = listen(target, eventName, function (this: EventTarget, e: KeyboardEvent) {
+        if (!require_trusted || e.isTrusted) {
             if (!(e.target as HTMLElement)?.closest("[data-hotkey-ignore]")) {
                 if (info.code === e.code.toUpperCase()) {
                     if (control_keys.every(n => info[n as keyof Hotkey] === e[n as keyof KeyboardEvent])) {
+                        once && unregister();
                         handler.call(this, e);
                     }
                 }
             }
         }
-    } as EventListener, options);
+    } as EventListener, native_options);
+
+    return unregister;
 }
 
 function describe(hotkey: string): Hotkey {

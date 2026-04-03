@@ -339,3 +339,63 @@ test("should not trigger on untrusted events when 'trusted' option is true", asy
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(false);
 });
+
+test("should not be consumed by non-matching keys when 'once' option is set", async ({ page }) => {
+    await page.evaluate(() => {
+        window.hotkeyCount = 0;
+        const el = document.getElementById("text");
+
+        window.registerHotkey(el, "Ctrl + K", () => {
+            window.hotkeyCount++;
+        }, "keydown", { once: true });
+    });
+
+    await page.locator("#text").focus();
+
+    await page.keyboard.press("A");
+    await page.keyboard.press("B");
+
+    await page.keyboard.press("Control+k");
+
+    const count = await page.evaluate(() => window.hotkeyCount);
+    expect(count).toBe(1);
+});
+
+test("should trigger only once with 'once' option", async ({ page }) => {
+    await page.evaluate(() => {
+        window.hotkeyCount = 0;
+        const el = document.getElementById("text");
+
+        window.registerHotkey(el, "Ctrl + K", () => {
+            window.hotkeyCount++;
+        }, "keydown", { once: true });
+    });
+
+    await page.locator("#text").focus();
+
+    // Press the hotkey twice
+    await page.keyboard.press("Control+k");
+    await page.keyboard.press("Control+k");
+
+    const count = await page.evaluate(() => window.hotkeyCount);
+    expect(count).toBe(1);
+});
+
+test("should trigger multiple times without 'once' option", async ({ page }) => {
+    await page.evaluate(() => {
+        window.hotkeyCount = 0;
+        const el = document.getElementById("text");
+
+        window.registerHotkey(el, "Ctrl + K", () => {
+            window.hotkeyCount++;
+        });
+    });
+
+    await page.locator("#text").focus();
+
+    await page.keyboard.press("Control+k");
+    await page.keyboard.press("Control+k");
+
+    const count = await page.evaluate(() => window.hotkeyCount);
+    expect(count).toBe(2);
+});
