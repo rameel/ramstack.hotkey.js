@@ -16,17 +16,15 @@ const aliases: Record<string, string> = {
     "windows": "meta",
     "cmd": "meta",
     "command": "meta",
-    "comma": ",",
-    "period": ".",
-    "quote": "\"",
-    "singlequote": "'",
-    "colon": ":",
-    "semicolon": ";",
-    "plus": "+",
-    "minus": "-",
-    "tilde": "~",
-    "equal": "=",
-    "slash": "/"
+    ",": "comma",
+    ".": "period",
+    "/": "slash",
+    "\\": "backslash",
+    ";": "semicolon",
+    "=": "equal",
+    "`": "backquote",
+    "]": "bracketright",
+    "[": "bracketleft",
 };
 
 const control_keys: string[] = [
