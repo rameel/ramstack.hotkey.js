@@ -115,7 +115,9 @@ function describe(hotkey: string): Hotkey {
                 k.length || error_invalid_key(hotkey);
                 k = k.toUpperCase();
 
-                data.code = k.length === 1 && k >= 'A' && k <= 'Z' ? `KEY${k}` : k;
+                data.code = /^[A-Z]$/.test(k) ? `KEY${k}`
+                          : /^[0-9]$/.test(k) ? `DIGIT${k}`
+                          : k;
                 break;
         }
         return data;
