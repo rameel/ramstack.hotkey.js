@@ -1,7 +1,8 @@
+import process from "node:process";
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(`file://${process.cwd()}/tests/generic.html`);
+    await page.goto(`file://${process.cwd()}/tests/assets/generic.html`);
     await page.evaluate(() => {
         window.hotkeyTriggered = false;
     });
@@ -398,4 +399,32 @@ test("should trigger multiple times without 'once' option", async ({ page }) => 
 
     const count = await page.evaluate(() => window.hotkeyCount);
     expect(count).toBe(2);
+});
+
+test("should trigger when Ctrl+1 is pressed", async ({ page }) => {
+    await page.evaluate(() => {
+        window.registerHotkey(document, "Ctrl+1", () => {
+            window.hotkeyTriggered = true;
+        });
+    });
+
+    await page.keyboard.down("Control");
+    await page.keyboard.press("1");
+
+    const triggered = await page.evaluate(() => window.hotkeyTriggered);
+    expect(triggered).toBe(true);
+});
+
+test("should trigger when Alt+0 is pressed", async ({ page }) => {
+    await page.evaluate(() => {
+        window.registerHotkey(document, "Alt+0", () => {
+            window.hotkeyTriggered = true;
+        });
+    });
+
+    await page.keyboard.down("Alt");
+    await page.keyboard.press("0");
+
+    const triggered = await page.evaluate(() => window.hotkeyTriggered);
+    expect(triggered).toBe(true);
 });
