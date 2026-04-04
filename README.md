@@ -3,7 +3,7 @@
 [![MIT](https://img.shields.io/github/license/rameel/ramstack.hotkey.js)](https://github.com/rameel/ramstack.hotkey.js/blob/main/LICENSE)
 
 The `@ramstack/hotkey` package is a very small and lightweight library for handling hotkeys.
-The library weighs around 1.3KB and approximately 750 bytes when gzipped.
+The library weighs around 1.4KB and approximately 800 bytes when gzipped.
 
 ## Installation
 
@@ -102,41 +102,39 @@ registerHotkey(window, "Win + PgUp", e => {
 
 #### hotkey (required)
 The combination of keys for the hotkey, e.g., `Ctrl + Alt + Delete`
-The hotkey description is a case-insensitive. Spaces are not important. Standard key names are used.
-You can find them here [Key values for keyboard events](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)
+The hotkey description is case-insensitive. Spaces are not important. Standard key names are used.
+You can find them here [Key values for keyboard events](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values).
 
 In addition, there are also aliases for some key names:
 
 ```js
 const aliases: Record<string, string> = {
-    "esc"         : "escape",
-    "ins"         : "insert",
-    "del"         : "delete",
-    "up"          : "arrowup",
-    "down"        : "arrowdown",
-    "right"       : "arrowright",
-    "left"        : "arrowleft",
-    "pgup"        : "pageup",
-    "pgdn"        : "pagedown",
-    "break"       : "pause",
-    "scroll"      : "scrolllock",
-    "scrlk"       : "scrolllock",
-    "prtscr"      : "printscreen",
-    "win"         : "meta",
-    "windows"     : "meta",
-    "cmd"         : "meta",
-    "command"     : "meta",
-    "comma"       : ",",
-    "period"      : ".",
-    "quote"       : "\"",
-    "singlequote" : "'",
-    "colon"       : ":",
-    "semicolon"   : ";",
-    "plus"        : "+",
-    "minus"       : "-",
-    "tilde"       : "~",
-    "equal"       : "=",
-    "slash"       : "/"
+    "esc"     : "escape",
+    "ins"     : "insert",
+    "del"     : "delete",
+    "up"      : "arrowup",
+    "down"    : "arrowdown",
+    "right"   : "arrowright",
+    "left"    : "arrowleft",
+    "pgup"    : "pageup",
+    "pgdn"    : "pagedown",
+    "break"   : "pause",
+    "scroll"  : "scrolllock",
+    "scrlk"   : "scrolllock",
+    "prtscr"  : "printscreen",
+    "win"     : "meta",
+    "windows" : "meta",
+    "cmd"     : "meta",
+    "command" : "meta",
+    ","       : "comma",
+    "."       : "period",
+    "/"       : "slash",
+    "\\"      : "backslash",
+    ";"       : "semicolon",
+    "="       : "equal",
+    "`"       : "backquote",
+    "]"       : "bracketright",
+    "["       : "bracketleft",
 };
 ```
 
