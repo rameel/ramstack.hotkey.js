@@ -103,22 +103,17 @@ function describe(hotkey: string): Hotkey {
     const keys = hotkey.replace(/\s+/g, "").toLowerCase().split("+");
     const info = keys.reduce((data, k) => {
         k = aliases[k] ?? k;
-        switch (k) {
-            case "ctrl":
-            case "alt":
-            case "shift":
-            case "meta":
-                data[`${k}Key`] = true;
-                break;
+        if (/^(ctrl|alt|shift|meta)$/.test(k)) {
+            // @ts-ignore
+            data[`${k}Key`] = true;
+        }
+        else {
+            k.length || error_invalid_key(hotkey);
+            k = k.toUpperCase();
 
-            default:
-                k.length || error_invalid_key(hotkey);
-                k = k.toUpperCase();
-
-                data.code = /^[A-Z]$/.test(k) ? `KEY${k}`
-                          : /^[0-9]$/.test(k) ? `DIGIT${k}`
-                          : k;
-                break;
+            data.code = /^[A-Z]$/.test(k) ? `KEY${k}`
+                      : /^[0-9]$/.test(k) ? `DIGIT${k}`
+                      : k;
         }
         return data;
     }, {
