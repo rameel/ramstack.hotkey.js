@@ -16,7 +16,7 @@ test("should trigger when Ctrl+Up is pressed on document", async ({ page }) => {
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("ArrowUp");
+    await page.keyboard.down("ArrowUp");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -30,7 +30,7 @@ test("should trigger when Ctrl+Up is pressed on window", async ({ page }) => {
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("ArrowUp");
+    await page.keyboard.down("ArrowUp");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -48,7 +48,7 @@ test("should trigger when Ctrl+K is pressed on a specific element", async ({ pag
     await page.locator("#text").focus();
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -64,7 +64,7 @@ test("should trigger when Shift+K is pressed on an element matching the selector
     await page.locator("#text").focus();
 
     await page.keyboard.down("Shift");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -82,7 +82,7 @@ test("should trigger when Ctrl+Alt+Shift+K is pressed", async ({ page }) => {
     await page.keyboard.down("Control");
     await page.keyboard.down("Alt");
     await page.keyboard.down("Shift");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -99,7 +99,7 @@ test("should trigger when Alt+Shift+K is pressed", async ({ page }) => {
 
     await page.keyboard.down("Alt");
     await page.keyboard.down("Shift");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -115,7 +115,7 @@ test("should trigger when Alt+K is pressed", async ({ page }) => {
     await page.locator("#text").focus();
 
     await page.keyboard.down("Alt");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -146,7 +146,7 @@ test("should not trigger hotkey when additional modifier keys are pressed", asyn
 
     await page.keyboard.down("Shift");
     await page.keyboard.down("Alt");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(false);
@@ -164,7 +164,7 @@ test("should not trigger on elements with [data-hotkey-ignore]", async ({ page }
     await page.locator("#ignored").focus();
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(false);
@@ -182,7 +182,7 @@ test("should not trigger when parent has [data-hotkey-ignore]", async ({ page })
     await page.locator("#ignored-via-parent").focus();
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(false);
@@ -263,7 +263,7 @@ test("should only trigger on trusted events when 'trusted' option is set to true
     await page.locator("#text").focus();
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("K");
+    await page.keyboard.down("K");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -394,6 +394,7 @@ test("should trigger multiple times without 'once' option", async ({ page }) => 
 
     await page.locator("#text").focus();
 
+    // Press the hotkey twice
     await page.keyboard.press("Control+k");
     await page.keyboard.press("Control+k");
 
@@ -409,7 +410,7 @@ test("should trigger when Ctrl+1 is pressed", async ({ page }) => {
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("1");
+    await page.keyboard.down("1");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -423,7 +424,7 @@ test("should trigger when Alt+0 is pressed", async ({ page }) => {
     });
 
     await page.keyboard.down("Alt");
-    await page.keyboard.press("0");
+    await page.keyboard.down("0");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);

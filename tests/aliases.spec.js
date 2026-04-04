@@ -81,7 +81,7 @@ test("should trigger when using 'Ctrl+,' literal character alias", async ({ page
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press(",");
+    await page.keyboard.down(",");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -95,7 +95,7 @@ test("should trigger when using 'Ctrl+.' literal character alias", async ({ page
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press(".");
+    await page.keyboard.down(".");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -109,7 +109,7 @@ test("should trigger when using 'Ctrl+/' literal character alias", async ({ page
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("/");
+    await page.keyboard.down("/");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -123,7 +123,7 @@ test("should trigger when using 'Ctrl+\\' literal character alias", async ({ pag
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("\\");
+    await page.keyboard.down("\\");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -137,7 +137,7 @@ test("should trigger when using 'Ctrl+;' literal character alias", async ({ page
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press(";");
+    await page.keyboard.down(";");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -151,7 +151,7 @@ test("should trigger when using 'Ctrl+=' literal character alias", async ({ page
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("=");
+    await page.keyboard.down("=");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -165,7 +165,7 @@ test("should trigger when using 'Ctrl+`' literal character alias", async ({ page
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("`");
+    await page.keyboard.down("`");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -179,7 +179,7 @@ test("should trigger when using 'Ctrl+]' literal character alias", async ({ page
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("]");
+    await page.keyboard.down("]");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
@@ -193,7 +193,7 @@ test("should trigger when using 'Ctrl+[' literal character alias", async ({ page
     });
 
     await page.keyboard.down("Control");
-    await page.keyboard.press("[");
+    await page.keyboard.down("[");
 
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
