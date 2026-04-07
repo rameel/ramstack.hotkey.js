@@ -429,3 +429,41 @@ test("should trigger when Alt+0 is pressed", async ({ page }) => {
     const triggered = await page.evaluate(() => window.hotkeyTriggered);
     expect(triggered).toBe(true);
 });
+
+test("should not trigger after AbortSignal is aborted", async ({ page }) => {
+    await page.evaluate(() => {
+        window.hotkeyCount = 0;
+        window.controller = new AbortController();
+
+        window.registerHotkey(document, "Ctrl+K", () => {
+            window.hotkeyCount++;
+        }, "keydown", { signal: window.controller.signal });
+    });
+
+    await page.keyboard.press("Control+k");
+
+    await page.evaluate(() => window.controller.abort());
+
+    await page.keyboard.press("Control+k");
+
+    const count = await page.evaluate(() => window.hotkeyCount);
+    expect(count).toBe(1);
+});
+
+test("should not trigger when AbortSignal is already aborted", async ({ page }) => {
+    await page.evaluate(() => {
+        window.hotkeyCount = 0;
+
+        const controller = new AbortController();
+        controller.abort();
+
+        window.registerHotkey(document, "Ctrl+K", () => {
+            window.hotkeyCount++;
+        }, "keydown", { signal: controller.signal });
+    });
+
+    await page.keyboard.press("Control+k");
+
+    const count = await page.evaluate(() => window.hotkeyCount);
+    expect(count).toBe(0);
+});
