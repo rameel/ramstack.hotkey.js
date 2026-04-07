@@ -80,7 +80,7 @@ export function registerHotkey(
     const once = (options as HotkeyEventListenerOptions)?.once;
 
     const native_options = options && typeof options === "object"
-        ? { capture: options.capture, passive: options.passive }
+        ? { capture: options.capture, passive: options.passive, signal: options.signal }
         : options;
 
     const unregister = listen(target, eventName, function (this: EventTarget, e: KeyboardEvent) {
